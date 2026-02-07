@@ -8,7 +8,7 @@ console.log('🔍 Verifying Crypto TypeScript App Setup...\n');
 
 // Check if we're in the right directory
 if (!fs.existsSync('package.json')) {
-  console.error('❌ Not in project root directory. Please run from fullstack_cryptography/');
+  console.error('❌ Not in project root directory. Please run from fintech/');
   process.exit(1);
 }
 
@@ -178,5 +178,5 @@ if (errors > 0) {
 } else if (warnings > 0) {
   console.log(`\n⚠️  Setup complete with ${warnings} warning(s).`);
 } else {
-  console.log('\n🎉 Perfect setup! Ready for crypto demo! 🔐');
+  console.log('\n🎉 Perfect setup! Ready for fintech demo! 🔐');
 }

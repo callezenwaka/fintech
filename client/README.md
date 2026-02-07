@@ -75,7 +75,7 @@ docker-compose up -d postgres
 docker-compose ps
 
 # Test if PostgreSQL is ready
-docker-compose exec postgres pg_isready -U crypto_user -d crypto_app
+docker-compose exec postgres pg_isready -U fintech_user -d fintech_app
 
 # Should output: localhost:5432 - accepting connections
 
@@ -85,7 +85,7 @@ npm run setup-db
 # Then start your application
 npm run dev
 
-docker exec -it crypto_postgres psql -U crypto_user -d crypto_app
+docker exec -it fintech_postgres psql -U fintech_user -d fintech_app
 
 # Start PostgreSQL
 docker-compose up -d postgres

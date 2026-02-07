@@ -2,27 +2,27 @@ services:
   # Database Services
   postgres:
     image: postgres:15-alpine
-    container_name: crypto_postgres
+    container_name: fintech_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: crypto_app
-      POSTGRES_USER: crypto_user
-      POSTGRES_PASSWORD: crypto_password
+      POSTGRES_DB: fintech_app
+      POSTGRES_USER: fintech_user
+      POSTGRES_PASSWORD: fintech_password
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U crypto_user -d crypto_app"]
+      test: ["CMD-SHELL", "pg_isready -U fintech_user -d fintech_app"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
-      - crypto_network
+      - fintech_network
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: crypto_pgadmin
+    container_name: fintech_pgadmin
     restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
@@ -44,20 +44,20 @@ services:
       postgres:
         condition: service_healthy
     networks:
-      - crypto_network
+      - fintech_network
 
   # Backend Server
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
-    container_name: crypto_server
+    container_name: fintech_server
     restart: unless-stopped
     ports:
       - "3001:3001"
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://crypto_user:crypto_password@postgres:5432/crypto_app
+      - DATABASE_URL=postgresql://fintech_user:fintech_password@postgres:5432/fintech_app
       - PORT=3001
     volumes:
       # Mount server source code for development
@@ -69,7 +69,7 @@ services:
       postgres:
         condition: service_healthy
     networks:
-      - crypto_network
+      - fintech_network
     command: npm run dev
 
   # Frontend Client
@@ -77,7 +77,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    container_name: crypto_client
+    container_name: fintech_client
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -95,7 +95,7 @@ services:
     depends_on:
       - server
     networks:
-      - crypto_network
+      - fintech_network
     command: npm run dev
 
 volumes:
@@ -103,5 +103,5 @@ volumes:
   pgadmin_data:
 
 networks:
-  crypto_network:
+  fintech_network:
     driver: bridge

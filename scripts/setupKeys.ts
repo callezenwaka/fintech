@@ -79,7 +79,7 @@ function createEnvFile(clientPrivateKeyB64: string): void {
 }
 
 function main(): void {
-  console.log('🚀 Setting up crypto keys for development...\n');
+  console.log('🚀 Setting up fintech keys for development...\n');
 
   try {
     // Check if keys already exist

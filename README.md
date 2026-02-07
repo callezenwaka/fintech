@@ -1,4 +1,4 @@
-# 🔐 Crypto Demo - Essential Guide
+# 🔐 Fintech Application Level Encryption (ALE) Demo - Essential Guide
 
 ## 🚀 Quick Start
 
@@ -53,8 +53,8 @@ curl http://localhost:3001/keys/server-public.pem
 ```bash
 docker-compose down -v
 docker-compose up --build
-docker exec -it crypto_postgres psql -U crypto_user -d crypto_app
-docker-compose exec postgres psql -U crypto_user -d crypto_app
+docker exec -it fintech_postgres psql -U fintech_user -d fintech_app
+docker-compose exec postgres psql -U fintech_user -d fintech_app
 ```
 
 ### **Port Conflicts:**

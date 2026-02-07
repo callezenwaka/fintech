@@ -4,9 +4,9 @@ import { DatabaseConfig } from '../types';
 const config: DatabaseConfig = {
   host: process.env.DB_HOST || 'postgres',
   port: parseInt(process.env.DB_PORT || '5432'),
-  database: process.env.DB_NAME || 'crypto_app',
-  user: process.env.DB_USER || 'crypto_user',
-  password: process.env.DB_PASSWORD || 'crypto_password',
+  database: process.env.DB_NAME || 'fintech_app',
+  user: process.env.DB_USER || 'fintech_user',
+  password: process.env.DB_PASSWORD || 'fintech_password',
 };
 
 export const pool = new Pool(config);

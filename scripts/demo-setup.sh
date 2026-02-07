@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # demo-setup.sh
-# This script automates the setup of a full-stack cryptography demo environment.
+# This script automates the setup of a full-stack fintech demo environment.
 set -e  # Exit on any error
 
-echo "🚀 Starting Crypto Demo - Full Pipeline Automation"
+echo "🚀 Starting Fintech Demo - Full Pipeline Automation"
 echo "=================================================="
 
 generate_key_pair() {
@@ -71,7 +71,7 @@ setup_database() {
     
     # Wait for database to be ready
     echo "⏳ Waiting for database to be ready..."
-    docker-compose exec -T postgres sh -c "until pg_isready -U crypto_user -d crypto_app; do sleep 1; done" 2>/dev/null || true
+    docker-compose exec -T postgres sh -c "until pg_isready -U fintech_user -d fintech_app; do sleep 1; done" 2>/dev/null || true
     
     # Function to run SQL file
     run_sql_file() {
@@ -80,8 +80,8 @@ setup_database() {
         
         if [[ -f "$file_path" ]]; then
             echo "📄 Running $description..."
-            docker cp "$file_path" crypto_postgres:/tmp/temp.sql
-            docker-compose exec -T postgres psql -U crypto_user -d crypto_app -f /tmp/temp.sql > /dev/null
+            docker cp "$file_path" fintech_postgres:/tmp/temp.sql
+            docker-compose exec -T postgres psql -U fintech_user -d fintech_app -f /tmp/temp.sql > /dev/null
             echo "✅ $description completed"
         else
             echo "⚠️  File not found: $file_path"
@@ -100,8 +100,8 @@ setup_database() {
     
     # Verify setup
     echo "🔍 Verifying database setup..."
-    USER_COUNT=$(docker-compose exec -T postgres psql -U crypto_user -d crypto_app -t -c "SELECT COUNT(*) FROM users;" 2>/dev/null | xargs || echo "0")
-    TRANSACTION_COUNT=$(docker-compose exec -T postgres psql -U crypto_user -d crypto_app -t -c "SELECT COUNT(*) FROM transactions;" 2>/dev/null | xargs || echo "0")
+    USER_COUNT=$(docker-compose exec -T postgres psql -U fintech_user -d fintech_app -t -c "SELECT COUNT(*) FROM users;" 2>/dev/null | xargs || echo "0")
+    TRANSACTION_COUNT=$(docker-compose exec -T postgres psql -U fintech_user -d fintech_app -t -c "SELECT COUNT(*) FROM transactions;" 2>/dev/null | xargs || echo "0")
     
     echo "👥 Users: $USER_COUNT"
     echo "💳 Transactions: $TRANSACTION_COUNT"
@@ -127,7 +127,7 @@ main() {
     setup_database
     
     echo ""
-    echo "🎉 Crypto Demo Pipeline Complete!"
+    echo "🎉 Fintech Demo Pipeline Complete!"
     echo "================================="
     echo "🌐 Client App:    http://localhost:3000"
     echo "🔧 API Server:    http://localhost:3001"

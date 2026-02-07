@@ -1,7 +1,7 @@
 {
-  "name": "fullstack_cryptography",
+  "name": "fintech",
   "version": "1.0.0",
-  "description": "Encrypted TypeScript Express + React Application - Cryptography Demo",
+  "description": "Fintech Application Level Encryption (ALE) Demo - TypeScript Express + React",
   "scripts": {
     "install:all": "npm install && cd server && npm install && cd ../client && npm install",
     "setup-keys": "cd scripts && npx ts-node setupKeys.ts",
@@ -42,16 +42,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/callezenwaka/fullstack_cryptography.git"
+    "url": "git+https://github.com/callezenwaka/fintech.git"
   },
   "keywords": ["cryptography", "demo", "encryption", "react", "express", "postgresql", "automation"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/callezenwaka/fullstack_cryptography/issues"
+    "url": "https://github.com/callezenwaka/fintech/issues"
   },
-  "homepage": "https://github.com/callezenwaka/fullstack_cryptography#readme",
+  "homepage": "https://github.com/callezenwaka/fintech#readme",
   "devDependencies": {
     "@types/node": "^24.1.0",
     "@types/pg": "^8.15.5",

@@ -1,1 +1,1 @@
-postgres:5432:crypto_app:crypto_user:crypto_password
+postgres:5432:fintech_app:fintech_user:fintech_password

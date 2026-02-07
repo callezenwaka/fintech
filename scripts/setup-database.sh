@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # setup-database.sh
-# This script sets up the database for the full-stack cryptography demo environment.
+# This script sets up the database for the full-stack fintech demo environment.
 echo "🚀 Setting up database..."
 
 # Wait for database to be ready
 echo "⏳ Waiting for database to be ready..."
-docker-compose exec -T postgres sh -c "until pg_isready -U crypto_user -d crypto_app; do sleep 1; done"
+docker-compose exec -T postgres sh -c "until pg_isready -U fintech_user -d fintech_app; do sleep 1; done"
 echo "✅ Database is ready"
 
 # Function to run SQL file
@@ -16,8 +16,8 @@ run_sql_file() {
     
     if [ -f "$file_path" ]; then
         echo "📄 Running $description..."
-        docker cp "$file_path" crypto_postgres:/tmp/temp.sql
-        docker-compose exec -T postgres psql -U crypto_user -d crypto_app -f /tmp/temp.sql
+        docker cp "$file_path" fintech_postgres:/tmp/temp.sql
+        docker-compose exec -T postgres psql -U fintech_user -d fintech_app -f /tmp/temp.sql
         echo "✅ $description completed"
     else
         echo "⚠️  File not found: $file_path"
@@ -37,12 +37,12 @@ run_sql_file "database/seeds/transactions.sql" "Transactions seed"
 # Verify setup
 echo "🔍 Verifying setup..."
 echo "📋 Tables:"
-docker-compose exec -T postgres psql -U crypto_user -d crypto_app -c "\dt"
+docker-compose exec -T postgres psql -U fintech_user -d fintech_app -c "\dt"
 
 echo "👥 Users count:"
-docker-compose exec -T postgres psql -U crypto_user -d crypto_app -c "SELECT COUNT(*) FROM users;"
+docker-compose exec -T postgres psql -U fintech_user -d fintech_app -c "SELECT COUNT(*) FROM users;"
 
 echo "💳 Transactions count:" 
-docker-compose exec -T postgres psql -U crypto_user -d crypto_app -c "SELECT COUNT(*) FROM transactions;"
+docker-compose exec -T postgres psql -U fintech_user -d fintech_app -c "SELECT COUNT(*) FROM transactions;"
 
 echo "🎉 Database setup completed successfully!"
